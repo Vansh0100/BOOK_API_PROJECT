@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+require("dotenv").config();
+
 const BookModel = require("./database/books");
 const AuthorModel = require("./database/authors");
 const PublicationModel = require("./database/publications");
@@ -6,12 +7,14 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
+const connection=require("./database/connection");
+
 // const { MongoClient } = require('mongodb');
-const mongodb =
-  "mongodb+srv://vansh_jaiswal:vansh123@cluster0.xzqxs.mongodb.net/BOOK-COMPANY-API?retryWrites=true&w=majority";
-mongoose
-  .connect(mongodb, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Connection Established"));
+// const mongodb =
+//   "mongodb+srv://vansh_jaiswal:vansh123@cluster0.xzqxs.mongodb.net/BOOK-COMPANY-API?retryWrites=true&w=majority";
+// mongoose
+//   .connect(mongodb, { useNewUrlParser: true, useUnifiedTopology: true })
+//   .then(() => console.log("Connection Established"));
 // client.connect(err => {
 //   const bcollection = client.db("BOOK-COMPANY-API").collection("books").findOne({ISBN:"12345three"});
 //   bcollection.then((data)=>console.log(data)).catch((err)=>console.log(err));
@@ -190,5 +193,7 @@ app.delete("/Deletebook-author/:isbn/:ID", async (req, res) => {
   }
 });
 app.listen(3000, () => {
-  console.log("Mongo Db is running...");
+  connection().then(()=>{console.log("Server is running!")}).catch((error)=>{console.log("Server is running but database connection failed!");
+  console.log(error);
+  });
 });
