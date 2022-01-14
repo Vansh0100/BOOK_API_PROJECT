@@ -19,6 +19,10 @@ mongoose
 // });
 // client.close();
 
+app.get("/",async(req,res)=>{
+  res.send("Welcome to BOOK API PROJECT");
+})
+
 app.get("/books", async (req, res) => {
   const getAllBooks = await BookModel.find();
   return res.json(getAllBooks);

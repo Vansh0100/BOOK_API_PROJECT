@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-const AuthorSchema=mongoose.Schema(
+const AuthorSchema=new mongoose.Schema(
     {
         id:Number,
         name:String,
